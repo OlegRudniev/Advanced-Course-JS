@@ -1,14 +1,15 @@
-class GoodsItem{
-  constructor(title='No name', price='No price'){
+class GoodsItem {
+  constructor(title = 'No name', price = 'No price') {
     this.title = title;
     this.price = price;
   }
-  render(){
-    return`<div class="goods-item"><h3>${this.title}</h3><p>${this.price} рублей</p></div>`;
+  render() {
+    return `<div class="goods-item"><h3>${this.title}</h3><p>${this.price} руб</p></div>`;
   }
 }
-class GoodsList{
-  constructor(container = '.container'){
+
+class GoodsList {
+  constructor(container = '.container') {
     this.container = container;
     this.goods = [];
   }
@@ -34,24 +35,28 @@ class GoodsList{
       }
     ];
   }
-  render(){
-    document.querySelector(this.container).innerHTML=this.goods.reduce((ass,item)=>{
+  render() {
+    document.querySelector(this.container).innerHTML = this.goods.reduce((acc, item) => {
       const good = new GoodsItem(item.title, item.price);
-      return ass+=good.render();
+      return acc += good.render();
     }, '');
   }
-  calcAllGoods(){
+  calcAllGoods() {
     const totalPrice = document.querySelector('.goods-total span');
     let sum = 0;
-    this.goods.forEach((elem)=>{
-      sum+= elem.price;
+    this.goods.forEach((elem) => {
+      sum += elem.price;
     });
     totalPrice.textContent = sum;
   }
-  }
-class RemoveItem{}
-class AddItem{}
-class CheckOut{}
+}
+
+
+class RemoveItem {}  // Удалить товар
+class AddItem {}     // Добавить товар
+class Checkout {}    // Для оформления заказа
+
+
 
 const list = new GoodsList('.goods-list');
 list.fetchGoods();
